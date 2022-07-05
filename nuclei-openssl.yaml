@@ -1,0 +1,31 @@
+id: OpenSSL-heapmc
+
+info:
+  name: Openssl Heap Memory Corruption
+  author: h4kux
+  severity: high
+  description: The OpenSSL version can be also obtained
+  tags: tech
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    matchers-condition: and
+    matchers:
+
+      - type: regex
+        part: header
+        regex:
+          - "OpenSSL/3.0.4"
+
+      - type: status
+        status:
+          - 200
+
+    extractors:
+      - type: kval
+        part: header
+        kval:
+          - Server
